@@ -1,0 +1,62 @@
+.outer {
+    background-color: black;
+    width: 250px;
+    min-height: 100vh;
+    padding: 20px;
+    /* position: fixed; */
+}
+
+.logo {
+    width: 130px;
+}
+
+.inner {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    height: 40px;
+    color: rgb(175, 175, 175);
+}
+
+.inner:hover {
+    cursor: pointer;
+    color: white;
+}
+
+.inner svg {
+    width: 30px;
+    padding-right: 10px;
+}
+
+.inner p {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.hrline {
+    height: 1px;
+    width: 200px;
+    margin: 10px 0px;
+    background-color: rgb(53, 53, 53);
+}
+
+.playlists {
+    color: rgb(175, 175, 175);
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.playlists p {
+    margin: 10px 0px;
+    cursor: pointer;
+    width: max-content;
+}
+
+.playlists p:hover {
+    color: white;
+}
+
+.activepage {
+    color: white;
+}
