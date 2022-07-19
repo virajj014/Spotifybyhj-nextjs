@@ -1,17 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from '../styles/Mainpage.module.css'
 import { signOut } from 'next-auth/react'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
+import { playlistatomdata, playlistatomid } from '../atoms/playlist'
+import { useRecoilState } from 'recoil'
+import spotifyApi from '../lib/spotify'
+
+
 const Mainpage = () => {
     const { data: session, status } = useSession();
+    const [loading, setloading] = useState(false);
+
+    const [viewplaylistid, setviewplaylistid] = useRecoilState(playlistatomid);
+    const [viewplaylistdata, setviewplaylistdata] = useRecoilState(playlistatomdata);
 
     // if (session) {
     //     console.log(session.user.email);
     // }
+    const router = useRouter()
+    if (session === null) {
+        router.push('/signin')
+    }
 
-    const router = useRouter();
+    useEffect(() => {
+        try {
+            if (session) {
+                spotifyApi.getPlaylist(viewplaylistid).then((data) => {
+                    setviewplaylistdata(data.body)
+                })
+                setloading(false)
+            }
+        }
+        catch (err) {
+            setloading(true)
+            console.log(err)
+        }
+    }, [viewplaylistid, session])
+
+    // console.log(viewplaylistdata);
 
     return (
         <div className={styles.outer}>
@@ -35,7 +63,10 @@ const Mainpage = () => {
                     : <></>}
             </div>
 
-
+            {viewplaylistdata == null ? <h1 style={{ color: 'white' }}>loading...</h1> : <>
+                <img width={'400px'} src={viewplaylistdata.images[0].url} />
+                <h1 style={{ color: 'white' }}>{viewplaylistdata.name}</h1>
+            </>}
         </div>
     )
 }

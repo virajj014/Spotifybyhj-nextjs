@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { useSession, signOut } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import useSpotify from '../hooks/spotifycustom'
+import { useRecoilState } from 'recoil'
+import { playlistatomid } from '../atoms/playlist'
 
 
 const Sidebar = () => {
@@ -12,18 +14,20 @@ const Sidebar = () => {
     const { data: session, status } = useSession();
 
     const [playlists, setplaylists] = useState([]);
+    const [viewplaylist, setviewplaylist] = useRecoilState(playlistatomid);
 
     useEffect(() => {
         if (spotifyApi.getAccessToken()) {
             spotifyApi.getUserPlaylists().then((data) => {
+
                 setplaylists(data.body.items);
             })
         }
 
     })
 
-    console.log(playlists)
-
+    // console.log(playlists)
+    // console.log(viewplaylist)
     return (
         <div className={styles.outer}>
             <div className={styles.logo}>
@@ -69,11 +73,9 @@ const Sidebar = () => {
 
             <div className={styles.hrline}></div>
             <div className={styles.playlists}>
-                <p>My playlist 1</p>
-                <p>Playlist</p>
-                <p>Coding</p>
-                <p>playlist 4</p>
-                <p>My playlist 5</p>
+                {playlists.map((playlist) => (
+                    <p key={playlist.id} onClick={() => setviewplaylist(playlist.id)}>{playlist.name} </p>
+                ))}
             </div>
         </div>
     )

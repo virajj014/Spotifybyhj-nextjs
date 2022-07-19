@@ -1,11 +1,24 @@
+import { useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import Mainpage from '../components/Mainpage'
 import Musicplayer from '../components/Musicplayer'
 import Sidebar from '../components/Sidebar'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const router = useRouter()
+  const { data: session } = useSession()
+
+  useEffect(() => {
+    if (session === null) {
+      router.push('/signin')
+    }
+  }, [session])
+
+
   return (
     <div className={styles.container}>
       <Head>
