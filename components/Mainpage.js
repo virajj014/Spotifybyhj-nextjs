@@ -13,6 +13,8 @@ const Mainpage = () => {
     const { data: session, status } = useSession();
     const [loading, setloading] = useState(false);
 
+    const [tduration, settduration] = useState('1000 hrs');
+
     const [viewplaylistid, setviewplaylistid] = useRecoilState(playlistatomid);
     const [viewplaylistdata, setviewplaylistdata] = useRecoilState(playlistatomdata);
 
@@ -39,7 +41,7 @@ const Mainpage = () => {
         }
     }, [viewplaylistid, session])
 
-    // console.log(viewplaylistdata);
+    console.log(viewplaylistdata);
 
     return (
         <div className={styles.outer}>
@@ -63,10 +65,88 @@ const Mainpage = () => {
                     : <></>}
             </div>
 
-            {viewplaylistdata == null ? <h1 style={{ color: 'white' }}>loading...</h1> : <>
-                <img width={'400px'} src={viewplaylistdata.images[0].url} />
-                <h1 style={{ color: 'white' }}>{viewplaylistdata.name}</h1>
-            </>}
+            {viewplaylistdata == null ? <h1 style={{ color: 'white' }}>loading...</h1> :
+
+                <div className={styles.playlistinside}>
+                    <div className={styles.s1}>
+                        <img src={viewplaylistdata.images[0].url} />
+                        <div>
+                            <h2>PLAYLIST</h2>
+                            <h1>{viewplaylistdata.name}</h1>
+                            <p>{viewplaylistdata.description}</p>
+                            <div className={styles.s11}>
+                                <p>{viewplaylistdata.owner.display_name}</p>
+                                <p className={styles.dot}></p>
+                                <p>{viewplaylistdata.followers.total} likes</p>
+                                <p className={styles.dot}></p>
+                                <p>{viewplaylistdata.tracks.items.length} songs</p>
+                                <p>,</p>
+                                <p className={styles.tduration}>{tduration}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className={styles.s2}>
+                        <div className={styles.s21}>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                            </svg>
+                            <p className={styles.dot}></p>
+                            <p className={styles.dot}></p>
+                            <p className={styles.dot}></p>
+                        </div>
+
+
+                        <div className={styles.s22}>
+                            <div className={styles.ptableheads}>
+                                <p className={styles.sno}>#</p>
+                                <p className={styles.title}>TITLE</p>
+                                <p className={styles.album}>ALBUM</p>
+                                <p className={styles.date}>DATE ADDED</p>
+                                <p className={styles.time}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </p>
+                            </div>
+                            <div className={styles.hrline}></div>
+                            <div className={styles.songslist}>
+                                {viewplaylistdata.tracks.items.map((item, index) => {
+                                    return (
+                                        <div className={styles.song}>
+                                            <p className={styles.sno}>{index + 1}</p>
+                                            <div className={styles.title}>
+                                                <img src={item.track.album.images[0]?.url} />
+                                                <div>
+                                                    <p className={styles.titlename}>{item.track.name}</p>
+                                                    <div className={styles.artistnames}>
+                                                        {item.track.artists.map((artist, index) => {
+                                                            return (
+                                                                <p className={styles.artist}>{artist.name} </p>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p className={styles.album}>{item.track.album.name}</p>
+                                            <p className={styles.date}>{item.added_at.split('T')[0]}</p>
+                                            <p className={styles.time}>
+                                                {Math.floor((item.track.duration_ms / 1000 / 60) << 0)}
+                                                :{Math.floor((item.track.duration_ms / 1000) % 60) < 10 ?
+                                                    '0' + Math.floor((item.track.duration_ms / 1000) % 60)
+                                                    : Math.floor((item.track.duration_ms / 1000) % 60)}
+                                            </p>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+
+                        </div>
+                    </div>
+                </div>}
         </div>
     )
 }

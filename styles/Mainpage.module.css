@@ -1,8 +1,8 @@
 .outer {
-    background-color: rgb(20, 20, 20);
+    background: linear-gradient(to bottom, #669999 0%, #0e0e0e 5%);
     width: 100%;
     min-height: 100vh;
-    padding-top: 10px;
+    padding: 10px 0px 0px 20px;
 }
 
 .topnav {
@@ -67,4 +67,202 @@
 .nameimg:hover {
     cursor: pointer;
     background-color: rgb(60, 60, 60);
+}
+
+
+/*  */
+.s1 {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    color: white;
+}
+
+.s1 img {
+    margin-right: 30px;
+    width: 230px;
+}
+
+.s1 h2 {
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 0px;
+}
+
+.s1 h1 {
+    font-size: 70px;
+}
+
+.s1 p {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgb(141, 141, 141);
+}
+
+.s11 {
+    display: flex;
+    align-items: center;
+    /* background-color: aqua; */
+}
+
+.dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: white;
+    margin: 0px 5px;
+    position: relative;
+    top: 3px;
+}
+
+.s11 p {
+    color: white;
+    font-weight: 600;
+    margin-right: 4px;
+}
+
+.s11 .tduration {
+    color: rgb(175, 175, 175);
+}
+
+
+.s2 {
+    background-color: rgba(0, 0, 0, 0.081);
+    padding: 30px;
+    width: 100%;
+}
+
+.s21 {
+    display: flex;
+    color: rgb(49, 255, 49);
+    align-items: center;
+}
+
+.s21 svg:nth-child(1) {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+}
+
+.s21 svg:nth-child(2) {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+}
+
+.s21 svg:hover {
+    cursor: pointer;
+    color: white;
+}
+
+
+.s22 {
+    display: flex;
+    width: 100%;
+    padding: 30px 0px;
+    flex-direction: column;
+}
+
+.ptableheads {
+    display: flex;
+    /* justify-content: space-between; */
+    width: 100%;
+    align-items: center;
+    /* background-color: aquamarine; */
+}
+
+.ptableheads p {
+    color: rgb(106, 106, 106);
+    /* font-size: 20px; */
+    padding: 0px 10px;
+}
+
+.time svg {
+    width: 30px;
+}
+
+.sno {
+    width: 4%;
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: right;
+    font-size: 18px;
+    padding-right: 10px;
+}
+
+.title {
+    display: flex;
+    justify-content: left;
+    /* background-color: aqua; */
+    width: 40%;
+    font-size: 15px;
+}
+
+.album {
+    width: 30%;
+    font-size: 15px;
+}
+
+.date {
+    width: 13%;
+    font-size: 15px;
+}
+
+
+.time {
+    width: 13%;
+    display: flex;
+    justify-content: center;
+    font-size: 15px;
+
+}
+
+.hrline {
+    width: 100%;
+    height: 1px;
+    background-color: rgb(55, 55, 55);
+    margin: 10px 0px;
+}
+
+.songslist {
+    background-color: inherit;
+    color: rgb(175, 175, 175);
+}
+
+.song {
+    margin: 30px 0px;
+    display: flex;
+    width: 100%;
+    align-items: center;
+}
+
+
+.song p {
+    font-size: 15px;
+    padding: 0px 10px;
+}
+
+.song .title div {
+    display: flex;
+    flex-direction: column;
+    /* background-color: aqua; */
+}
+
+.artistnames {
+    display: flex;
+    flex-direction: row;
+    /* background-color: aquamarine; */
+    width: 100%;
+}
+
+
+.titlename {
+    color: white;
+}
+
+.song img {
+    width: 50px;
+    height: fit-content;
+    margin: 0px 10px;
 }
