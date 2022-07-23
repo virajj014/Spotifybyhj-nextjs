@@ -231,12 +231,17 @@
 }
 
 .song {
-    margin: 30px 0px;
+    margin: 10px 0px;
+    padding: 10px 0px;
     display: flex;
     width: 100%;
     align-items: center;
+    cursor: pointer;
 }
 
+.song:hover {
+    background-color: rgba(255, 255, 255, 0.075);
+}
 
 .song p {
     font-size: 15px;

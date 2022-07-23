@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react'
 import { playlistatomdata, playlistatomid } from '../atoms/playlist'
 import { useRecoilState } from 'recoil'
 import spotifyApi from '../lib/spotify'
-
+import Songcard from './Songcard'
 
 const Mainpage = () => {
     const { data: session, status } = useSession();
@@ -41,7 +41,7 @@ const Mainpage = () => {
         }
     }, [viewplaylistid, session])
 
-    console.log(viewplaylistdata);
+    // console.log(viewplaylistdata);
 
     return (
         <div className={styles.outer}>
@@ -116,29 +116,8 @@ const Mainpage = () => {
                             <div className={styles.songslist}>
                                 {viewplaylistdata.tracks.items.map((item, index) => {
                                     return (
-                                        <div className={styles.song}>
-                                            <p className={styles.sno}>{index + 1}</p>
-                                            <div className={styles.title}>
-                                                <img src={item.track.album.images[0]?.url} />
-                                                <div>
-                                                    <p className={styles.titlename}>{item.track.name}</p>
-                                                    <div className={styles.artistnames}>
-                                                        {item.track.artists.map((artist, index) => {
-                                                            return (
-                                                                <p className={styles.artist}>{artist.name} </p>
-                                                            )
-                                                        })}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p className={styles.album}>{item.track.album.name}</p>
-                                            <p className={styles.date}>{item.added_at.split('T')[0]}</p>
-                                            <p className={styles.time}>
-                                                {Math.floor((item.track.duration_ms / 1000 / 60) << 0)}
-                                                :{Math.floor((item.track.duration_ms / 1000) % 60) < 10 ?
-                                                    '0' + Math.floor((item.track.duration_ms / 1000) % 60)
-                                                    : Math.floor((item.track.duration_ms / 1000) % 60)}
-                                            </p>
+                                        <div key={index}>
+                                            <Songcard item={item} index={index} />
                                         </div>
                                     )
                                 })}
